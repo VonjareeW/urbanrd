@@ -2,151 +2,90 @@
 
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 
 // TODO: Create an array of questions for user input
+
 const questions = [
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'title',
+      message: 'Enter the project title:',
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'description',
+      message: 'Enter a project description:',
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'installation',
+      message: 'Enter installation instructions:',
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'usage',
+      message: 'Enter usage information:',
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'list',
+      name: 'license',
+      message: 'Choose a license for your application:',
+      choices: ['MIT', 'Apache 2.0', 'GPL 3.0', 'None'],
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'licenseDescription',
+      message: 'Enter a description of the chosen license:',
+      when: (answers) => answers.license !== 'None',
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'contributing',
+      message: 'Enter contribution guidelines:',
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'tests',
+      message: 'Enter test instructions:',
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'github',
+      message: 'Enter your GitHub username:',
     },
     {
-        type: "input",
-        name: "header",
-        message: "?"
+      type: 'input',
+      name: 'email',
+      message: 'Enter your email address:',
     },
-    {
-        type: "input",
-        name: "header",
-        message: "?"
-    },
-    {
-        type: "input",
-        name: "header",
-        message: "?"
-    },
-    {
-        type: "input",
-        name: "header",
-        message: "?"
-    },
-    {
-        type: "input",
-        name: "header",
-        message: "?"
-    },
-    {
-        type: "input",
-        name: "header",
-        message: "?"
-    },
-    {
-        type: "input",
-        name: "header",
-        message: "?"
-    },
-    {
-        type: "input",
-        name: "header",
-        message: "?"
-    },
-    {
-        type: "input",
-        name: "header",
-        message: "?"
-    },
-];
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {
-
-    {
-        console.log(initNote);
-    
-        inq.prompt(questions).then((answers) =>
-        {
-            # ${userAnswers.projectTitle}
-
-            ## Description
-            ${userAnswers.description}
-            
-            ## Table of Contents
-            - [Installation](#installation)
-            - [Usage](#usage)
-            - [License](#license)
-            - [Contributing](#contributing)
-            - [Tests](#tests)
-            - [Questions](#questions)
-            
-            ## Installation
-            ${userAnswers.installation}
-            
-            ## Usage
-            ${userAnswers.usage}
-            
-            ## License
-            ${userAnswers.license}
-            
-            ## Contributing
-            ${userAnswers.contributing}
-            
-            ## Tests
-            ${userAnswers.tests}
-            
-            ## Questions
-            GitHub: [${userAnswers.githubUsername}](https://github.com/${userAnswers.githubUsername})
-            Email: ${userAnswers.email}
-            ;
-    
-         
-    
+  ];
+  
 
 
+// This function will create the ReadMe 
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('README.md successfully generated!');
+    }
+  });
 }
 
-// Function call to initialize app
-init();
+
+
+  
+  // Function to initialize app
+  function init() {
+    inquirer.prompt(questions).then((inquirerResponses) => {
+      console.log('Generating README...');
+      writeToFile('README.md', generateMarkdown({ ...inquirerResponses }));
+    });
+  }
+  
+  // Function call to initialize app
+  init();
+
