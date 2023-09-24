@@ -64,3 +64,6 @@ This project is licensed under the [MIT License](./LICENSE).
     
 <img width="1440" alt="readmescreenshot" src="https://github.com/VonjareeW/urbanrd/assets/52430595/e4180a0f-78ea-4b1e-ac79-0197db5d388c">
 
+## Video link
+[
+](https://drive.google.com/file/d/1NbvPLwJK3UPXEatORhM3efl9qC0WIZmn/view?pli=1)https://drive.google.com/file/d/1NbvPLwJK3UPXEatORhM3efl9qC0WIZmn/view?pli=1
